@@ -1,0 +1,20 @@
+{
+  "short_name": "POSPro",
+  "name": "POS Pro Thermal 58mm",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#1a1a2e",
+  "background_color": "#0f3460"
+}

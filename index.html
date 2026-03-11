@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CR MiniPos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log("PWA Ready!"))
+      .catch(err => console.log("PWA Failed", err));
+  }
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body>
+
+<div class="header" id="pageTitle">PRODUK</div>
+
+<div class="container">
+    <div id="reader-container" class="card" style="display: none;">
+        <div id="reader"></div>
+        <button onclick="stopScanner()" style="background: var(--r); margin-top:10px;">Tutup Kamera</button>
+    </div>
+
+    <section id="page-produk" class="page active">
+        <div class="card">
+            <h3>Input & Edit Produk</h3>
+            <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                <input type="text" id="prod_kode" placeholder="Scan/Ketik Kode">
+                <button onclick="startScanner('prod_kode')" style="width: 50px; background: var(--y);"></button>
+            </div>
+            <input type="text" id="prod_nama" placeholder="Nama Barang">
+            <input type="number" id="prod_harga" placeholder="Harga Jual">
+            <button onclick="simpanProduk()" id="btnSimpanProduk">Simpan Produk</button>
+        </div>
+        <div class="card">
+            <div id="listProduk"></div>
+        </div>
+    </section>
+
+    <section id="page-kasir" class="page">
+        <div class="card" style="border: 2px solid var(--a);">
+            <div style="display: flex; gap: 5px;">
+                <input type="text" id="scan_input" placeholder="Scan QR / Cari..." oninput="handleScan(this.value)">
+                <button onclick="startScanner('scan_input')" style="width: 50px; background: var(--a);"></button>
+            </div>
+        </div>
+        <div class="card">
+            <div id="cartKasir">Keranjang Kosong</div>
+            <div class="total-box" id="totalKasir">Total: Rp 0</div>
+            <hr>
+            <label>Bayar Tunai:</label>
+            <input type="number" id="bayar_tunai" placeholder="Rp 0" oninput="hitungKembalian()">
+            <div style="margin: 10px 0; font-weight: bold;">
+                Kembali: <span id="teks_kembalian" style="color:var(--y)">Rp 0</span>
+            </div>
+            <button onclick="checkoutPenjualan()" style="background: var(--a); color: var(--p);">Checkout & Cetak</button>
+        </div>
+    </section>
+
+    <section id="page-purchasing" class="page">
+        <div class="card">
+            <h3>Restok Barang</h3>
+            <select id="buy_id_produk"></select>
+            <input type="number" id="buy_qty" placeholder="Jumlah Masuk">
+            <input type="number" id="buy_harga_beli" placeholder="Harga Modal">
+            <button onclick="simpanPembelian()">Update Stok</button>
+        </div>
+    </section>
+
+    <section id="page-laporan" class="page">
+        <div class="card" id="laporanSummary"></div>
+        <button onclick="resetSemua()" style="background: var(--r);">Hapus Semua Data</button>
+    </section>
+</div>
+
+<div id="nota-cetak">
+    <center>
+        <h3 style="margin:0">TOKO SAMPLE</h3>
+        <p style="margin:0; font-size: 8pt;">Jl. Pemuda No.56, Bekonang, Mojolaban, Sukoharjo</p> <br>
+        <span id="nota-tgl" style="font-size:7pt"></span>
+        <div style="border-top:1px dashed #000; margin:5px 0"></div>
+    </center>
+    <div id="nota-items"></div>
+    <div style="border-top:1px dashed #000; margin:5px 0"></div>
+    <div class="nota-row" style="font-weight:bold"><span>TOTAL</span> <span id="nota-total"></span></div>
+    <div class="nota-row"><span>BAYAR</span> <span id="nota-bayar"></span></div>
+    <div class="nota-row" style="font-weight:bold"><span>KEMBALI</span> <span id="nota-kembalian"></span></div>
+    <center><p style="font-size:7pt; margin-top:10px">Terima Kasih Atas Kunjungan Anda</p></center>
+</div>
+
+<nav class="navbar">
+    <div class="nav-item active" onclick="showPage('produk', this)"><br>Produk</div>
+    <div class="nav-item" onclick="showPage('kasir', this)"><br>Kasir</div>
+    <div class="nav-item" onclick="showPage('purchasing', this)"><br>Stok</div>
+    <div class="nav-item" onclick="showPage('laporan', this)"><br>Laporan</div>
+</nav>
+
+<script src="app.js"></script>
+</body>
+</html>
