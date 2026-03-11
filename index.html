@@ -6,6 +6,7 @@
     <title>CR MiniPos</title>
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
@@ -31,7 +32,9 @@
             <h3>Input & Edit Produk</h3>
             <div style="display: flex; gap: 5px; margin-bottom: 10px;">
                 <input type="text" id="prod_kode" placeholder="Scan/Ketik Kode">
-                <button onclick="startScanner('prod_kode')" style="width: 50px; background: var(--y);"></button>
+                <button onclick="startScanner('prod_kode')" style="width: 50px; background: var(--y);">
+                   <span class="material-icons" style="vertical-align: middle;">photo_camera</span>
+                </button>
             </div>
             <input type="text" id="prod_nama" placeholder="Nama Barang">
             <input type="number" id="prod_harga" placeholder="Harga Jual">
@@ -46,7 +49,9 @@
         <div class="card" style="border: 2px solid var(--a);">
             <div style="display: flex; gap: 5px;">
                 <input type="text" id="scan_input" placeholder="Scan QR / Cari..." oninput="handleScan(this.value)">
-                <button onclick="startScanner('scan_input')" style="width: 50px; background: var(--a);"></button>
+                <button onclick="startScanner('prod_kode')" style="width: 50px; background: var(--y);">
+                   <span class="material-icons" style="vertical-align: middle;">photo_camera</span>
+                </button>
             </div>
         </div>
         <div class="card">
@@ -94,13 +99,22 @@
 </div>
 
 <nav class="navbar">
-    <div class="nav-item active" onclick="showPage('produk', this)"><br>Produk</div>
-    <div class="nav-item" onclick="showPage('kasir', this)"><br>Kasir</div>
-    <div class="nav-item" onclick="showPage('purchasing', this)"><br>Stok</div>
-    <div class="nav-item" onclick="showPage('laporan', this)"><br>Laporan</div>
+    <div class="nav-item active" onclick="showPage('produk', this)">
+        <span class="material-icons">inventory_2</span><br>Produk
+    </div>
+    <div class="nav-item" onclick="showPage('kasir', this)">
+        <span class="material-icons">shopping_cart</span><br>Kasir
+    </div>
+    <div class="nav-item" onclick="showPage('purchasing', this)">
+        <span class="material-icons">local_shipping</span><br>Stok
+    </div>
+    <div class="nav-item" onclick="showPage('laporan', this)">
+        <span class="material-icons">bar_chart</span><br>Laporan
+    </div>
 </nav>
 
 <script src="app.js"></script>
 </body>
 
 </html>
+
