@@ -24,4 +24,17 @@ th, td { text-align: left; padding: 8px; border-bottom: 1px solid #333; }
     .nota-row { display: flex; justify-content: space-between; font-size: 8pt; margin-bottom: 2px; }
     .item-detail { font-size: 6pt !important; line-height: 1; margin-bottom: 4px; border-bottom: 0.1mm solid #eee; }
     .navbar, .header, .container, button { display: none !important; }
+
+}
+
+/* Tambahkan di style.css */
+.material-icons {
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-item .material-icons {
+    font-size: 24px;
+    margin-bottom: 2px;
 }
